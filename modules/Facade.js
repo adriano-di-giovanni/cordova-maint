@@ -54,3 +54,5 @@ Facade.prototype.updatePlugins = function (pluginIds) {
   var command = pluginIds.reduce(reducer, '')
   _exec(command)
 }
+
+module.exports = new Facade()
