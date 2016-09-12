@@ -9,7 +9,7 @@ function getPlugin (id) {
 function transformVariables (variables) {
   return Object.keys(variables)
     .map(function (key) {
-      return '--variable :key=:value'
+      return '--variable :key=":value"'
         .replace(':key', key)
         .replace(':value', variables[key])
     })

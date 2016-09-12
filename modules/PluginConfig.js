@@ -96,4 +96,13 @@ PluginConfig.prototype.getAll = function (platforms, projectName) {
   }, this)
 }
 
+PluginConfig.prototype.setUpdateStrategy = function (strategy) {
+  this._strategy = strategy
+  return this
+}
+
+PluginConfig.prototype.getUpdateStrategy = function () {
+  return this._strategy
+}
+
 module.exports = PluginConfig

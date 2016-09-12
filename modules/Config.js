@@ -33,4 +33,15 @@ Config.prototype.getPlugin = function (id) {
   return this._pluginConfig.get(this.getPlatforms(), this.getProjectName(), id)
 }
 
+Config.prototype.setPluginUpdateStrategy = function (strategy) {
+  this._pluginConfig.setUpdateStrategy(strategy)
+  return this
+}
+
+Config.prototype.implementPluginUpdateStrategy = function (update, remove, add) {
+  var strategy = this._pluginConfig.getUpdateStrategy()
+  strategy(this._platforms, this._projectName, update, remove, add)
+  return this
+}
+
 module.exports = Config

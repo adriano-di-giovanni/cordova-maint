@@ -45,5 +45,5 @@ You have to specify both platform and project name.
 
 ```shell
 cd MyFirstApp/
-cordova-maint --platform=android --project-name=MyFirstApp plugin update cc.fovea.cordova.purchase
+cordova-maint --platform=android --project-name=MyFirstApp update cc.fovea.cordova.purchase
 ```

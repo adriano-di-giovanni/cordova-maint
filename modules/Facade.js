@@ -11,6 +11,7 @@ function Facade () {
   this._configDir = process.cwd()
   var config = this._config = new Config()
   this._shellTransform = new ShellTransform(config)
+  this._isDryRun = false
 }
 
 function _loadConfigIfNeeded () {
@@ -36,7 +37,16 @@ Facade.prototype.setConfigDir = function (configDir) {
   return this
 }
 
+Facade.prototype.setDryRun = function (isDryRun) {
+  this._isDryRun = !!isDryRun
+  return this
+}
+
 function _exec (command) {
+  if (this._isDryRun) {
+    console.log(command)
+    return void 0
+  }
   var child = exec(command)
   child.stdout.pipe(process.stdout)
   child.stderr.pipe(process.stderr)
@@ -52,7 +62,28 @@ Facade.prototype.updatePlugins = function (pluginIds) {
   _loadConfigIfNeeded.call(this)
   var reducer = _createReducer.call(this, 'updatePlugin')
   var command = pluginIds.reduce(reducer, '')
-  _exec(command)
+  return _exec.call(this, command)
+}
+
+Facade.prototype.updateAllPlugins = function () {
+  _loadConfigIfNeeded.call(this)
+  var shellTransform = this._shellTransform
+  var command = ''
+
+  function update (id) {
+    command += shellTransform.updatePlugin(id) + '\n'
+  }
+
+  function remove (id) {
+    command += shellTransform.removePlugin(id) + '\n'
+  }
+
+  function add (id) {
+    command += shellTransform.addPlugin(id) + '\n'
+  }
+
+  this._config.implementPluginUpdateStrategy(update, remove, add)
+  return _exec.call(this, command)
 }
 
 module.exports = new Facade()
