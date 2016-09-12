@@ -2,7 +2,7 @@
   "name": "cordova-maint",
   "version": "0.1.0",
   "description": "A command-line utility for streamlining management of cordova-based projects",
-  "main": "index.js",
+  "main": "cordova-maint.js",
   "directories": {
     "test": "test"
   },
@@ -11,7 +11,7 @@
     "coverage": "nyc npm test && nyc report"
   },
   "bin": {
-    "cordova-maint": "index.js"
+    "cordova-maint": "cordova-maint.js"
   },
   "keywords": [],
   "author": "Adriano Di Giovanni <me@adrianodigiovanni.com> (http://adrianodigiovanni.com/)",
