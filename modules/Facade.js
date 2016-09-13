@@ -18,7 +18,7 @@ function _loadConfigIfNeeded () {
   if (!this._shouldLoadConfig) {
     return void 0
   }
-  var configFile = path.join(this._configDir, './cordova-maint')
+  var configFile = path.resolve(process.cwd(), this._configDir, './cordova-maint')
   require(configFile)(this._config)
 }
 
