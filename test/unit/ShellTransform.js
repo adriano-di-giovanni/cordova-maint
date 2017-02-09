@@ -76,7 +76,7 @@ describe('ShellTransform', function () {
       expect(
         shellTransform.addPlugin('cc.fovea.cordova.purchase')
       ).to.equal(
-        'cordova plugin add cc.fovea.cordova.purchase --variable BILLING_KEY=android/BILLING_KEY'
+        'cordova plugin add cc.fovea.cordova.purchase --variable BILLING_KEY="android/BILLING_KEY"'
       )
     })
   })
