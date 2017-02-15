@@ -18,14 +18,14 @@ function transformVariables (variables) {
 
 ShellTransform.prototype.removePlugin = function (id) {
   var plugin = getPlugin.call(this, id)
-  return 'cordova plugin rm :id'
+  return 'cordova plugin rm :id --save'
     .replace(':id', plugin.id)
     .trim()
 }
 
 ShellTransform.prototype.addPlugin = function (id) {
   var plugin = getPlugin.call(this, id)
-  return 'cordova plugin add :spec :variables'
+  return 'cordova plugin add :spec :variables --save'
     .replace(':spec', plugin.spec)
     .replace(':variables', transformVariables(plugin.variables))
     .trim()
